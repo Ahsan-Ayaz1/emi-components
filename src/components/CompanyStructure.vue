@@ -1,6 +1,7 @@
 <script setup>
 import Checkbox from "./Checkbox.vue";
 import Button from "./Button.vue";
+import { ref } from "vue";
 //Table Heading
 const tableHeadings = [
     { id: 1, text: 'Name' },
@@ -9,6 +10,12 @@ const tableHeadings = [
     { id: 4, text: 'UBO%' },
     { id: 5, text: '' },
 ]
+
+const isDropdownOpen = ref(false);
+
+const toggleDropdown = () => {
+    isDropdownOpen.value = !isDropdownOpen.value;
+};
 </script>
 
 <template>
@@ -35,39 +42,77 @@ const tableHeadings = [
                 </tr>
             </thead>
             <tbody class="bg-customBg">
-                <tr class="border bg-customBg flex-grow ">
-                    <td scope="row"
-                        class="border border-customBorder rounded-md font-medium text-gray-900 whitespace-nowrap ">
-                        <textarea
-                            class="h-customHeight overflow-hidden bg-customBg focus:outline-none px-2 w-full py-3 rounded-md border-customBorder"></textarea>
+                <tr class=" bg-customBg flex-grow ">
+                    <td scope="row" rowspan="3"
+                        class="border border-customBorder px-4 py-auto rounded-md font-medium text-gray-900 whitespace-nowrap ">
+                        <div class="flex items-center">
+                            <i class="material-icons appartment">
+                                apartment
+                            </i>
+                            <input type="text"
+                                class="h-customHeight overflow-hidden bg-customBg focus:outline-none px-2 w-full py-3 rounded-md border-customBorder">
+                        </div>
                     </td>
-                    <td class="border p-4 border-customBorder">
+                    <td class=" p-4 ">
                         <Checkbox label="Director" />
-                        <Checkbox label="Secretary" />
-                        <Checkbox label="Signatory" />
+
                     </td>
-                    <td class="border border-customBorder">
-                        <input type="number" @click.stop="preventClose" @click="toggleDropdown"
+                    <td class="border border-customBorder" scope="row" rowspan="3">
+                        <input type="number"
                             class=" h-customHeight w-full bg-customBg focus:outline-none px-2 py-3  rounded-md border-customBorder"
                             placeholder="%" min="0">
                     </td>
-                    <td class="border border-customBorder">
+                    <td class="border border-customBorder" scope="row" rowspan="3">
                         <input type="number"
                             class="h-customHeight w-full py-3 focus:outline-none px-2 bg-customBg rounded-md border-customBorder"
                             placeholder="%" min="0">
                     </td>
-                    <td class="border border-customBorder text-center align-middle">
+                    <td class="border border-customBorder text-center align-middle" scope="row" rowspan="3">
                         <img src="../assets/icons/delete.png" class="items-center" alt="">
                     </td>
 
                 </tr>
-
+                <tr>
+                    <td class="p-4">
+                        <Checkbox label="Director" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border-b p-4 border-customBorder">
+                        <Checkbox label="Director" />
+                    </td>
+                </tr>
                 <tr class="w-full border-gray-400 items-center bg-customBg">
-                    <td scope="col" colspan="5" class="px-6  items-center justify-center text-center text-base pt-2 ">
-                        <i class="material-icons">add_circle</i>
+                    <td scope="col" colspan="5" class="px-6 items-center justify-center text-center text-base pt-2">
+                        <div class="relative inline-block text-left">
+                            <i @click="toggleDropdown" class="material-icons">add_circle</i>
+
+                            <div v-if="isDropdownOpen"
+                                class="origin-top-right absolute right-[-2rem] w-32 top-6 focus:outline-none" role="menu"
+                                aria-orientation="vertical" aria-labelledby="options-menu">
+                                <div class="z-10 fixed border border-customBorder bg-customBg rounded" role="none">
+                                    <a href="#"
+                                        class="flex items-center gap-1 px-4 py-2 border-b border-customBorder text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                        role="menuitem">Add Individual
+                                        <i class="material-icons appartment">
+                                            person
+                                        </i>
+                                    </a>
+                                    <a href="#"
+                                        class="flex gap-1 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                        role="menuitem">Add Company
+                                        <i class="material-icons appartment">
+                                            apartment
+                                        </i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>
+
+
         </table>
     </div>
     <div class="w-full mt-10 flex justify-between">
@@ -80,6 +125,12 @@ const tableHeadings = [
 .material-icons {
     font-size: 34px !important;
     color: #F0C10E;
+    cursor: pointer;
+}
+
+.appartment {
+    font-size: 24px !important;
+    color: black !important;
     cursor: pointer;
 }
 </style>
