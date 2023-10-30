@@ -1,3 +1,8 @@
+<script setup>
+import Checkbox from './Checkbox.vue';
+import Button from './Button.vue';
+</script>
+
 <template>
     <p class="mt-2 text-xs text-gray-500">Add general company information</p>
     <div class="container">
@@ -46,10 +51,3 @@
 
     </div>
 </template>
-
-<script setup>
-import Checkbox from './Checkbox.vue';
-import Button from './Button.vue';
-</script>
-
-<style scoped></style>

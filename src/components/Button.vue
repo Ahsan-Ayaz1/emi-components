@@ -1,3 +1,7 @@
+<script setup>
+const props = defineProps(['btntext'])
+</script>
+
 <template>
     <div class="px-14">
         <button
@@ -8,10 +12,3 @@
         </button>
     </div>
 </template>
-
-<script setup>
-
-const props = defineProps(['btntext'])
-
-</script>
-

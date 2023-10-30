@@ -1,3 +1,7 @@
+<script setup>
+const props = defineProps(['label'])
+</script>
+
 <template>
     <label class="form-control">
         <input type="checkbox" name="checkbox" />
@@ -5,11 +9,6 @@
     </label>
 </template>
 
-<script setup>
-
-const props = defineProps(['label'])
-
-</script>
 
 <style>
 .form-control {

@@ -18,8 +18,8 @@ const tableHeadings = [
         You will have to upload Power of Attorney docments later for any Signatories added.
     </p>
     <div class="relative overflow-x-auto  shadow-md items-center sm:rounded-lg mt-8">
-        <table class="w-full text-sm border text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-customTablebg dark:bg-gray-700 dark:text-gray-400">
+        <table class="w-full text-sm border text-left text-gray-500 ">
+            <thead class="text-xs text-gray-700 uppercase bg-customTablebg ">
                 <tr class="border-b border-gray-400">
                     <th scope="col" colspan="5" class="px-6 text-base py-3 text-left">
                         Company 1 Structure
@@ -33,9 +33,9 @@ const tableHeadings = [
                 </tr>
             </thead>
             <tbody class="bg-customBg">
-                <tr class="border bg-customBg flex-grow dark:bg-gray-900 dark:border-gray-700">
+                <tr class="border bg-customBg flex-grow ">
                     <td scope="row"
-                        class="border border-customBorder rounded-md font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        class="border border-customBorder rounded-md font-medium text-gray-900 whitespace-nowrap ">
                         <textarea
                             class="h-customHeight overflow-hidden bg-customBg focus:outline-none px-2 w-full py-3 rounded-md border-customBorder"></textarea>
                     </td>

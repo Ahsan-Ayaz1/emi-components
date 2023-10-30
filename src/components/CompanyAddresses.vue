@@ -1,3 +1,13 @@
+<script setup>
+import RegisterAddress from './RegisterAddress.vue';
+import RadioButton from './RadioButton.vue';
+import AddAnotherAddress from "./AddAnotherAddress.vue"
+import { ref } from 'vue';
+const anotherAddress = ref(false)
+const operationalAddress = ref('Same')
+const mailingAddress = ref('Same') 
+</script>
+
 <template>
     <label for="address" class=" font-medium text-base leading-6 mt-8">Operational Address</label>
     <div class="mt-4">
@@ -22,16 +32,6 @@
         <p>Add another address</p>
     </div>
 </template>
-
-<script setup>
-import RegisterAddress from './RegisterAddress.vue';
-import RadioButton from './RadioButton.vue';
-import AddAnotherAddress from "./AddAnotherAddress.vue"
-import { ref } from 'vue';
-const anotherAddress = ref(false)
-const operationalAddress = ref('Same')
-const mailingAddress = ref('Same') 
-</script>
 
 <style scoped>
 .material-icons {

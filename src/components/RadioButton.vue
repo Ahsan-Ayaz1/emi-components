@@ -1,13 +1,13 @@
+<script setup>
+const props = defineProps(['radioLabel'])
+</script>
+
 <template>
     <label class="form-control text-base">
         <input type="radio" name="radio" />
         {{ radioLabel }}
     </label>
 </template>
-
-<script setup>
-const props = defineProps(['radioLabel'])
-</script>
 
 <style>
 input[type="radio"]::before {
