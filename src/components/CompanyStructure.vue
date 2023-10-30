@@ -1,7 +1,7 @@
 <script setup>
 import Checkbox from "./Checkbox.vue";
 import Button from "./Button.vue";
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 //Table Heading
 const tableHeadings = [
     { id: 1, text: 'Name' },
@@ -16,6 +16,25 @@ const isDropdownOpen = ref(false);
 const toggleDropdown = () => {
     isDropdownOpen.value = !isDropdownOpen.value;
 };
+
+const preventClose = (event) => {
+    event.stopPropagation();
+};
+
+const closeDropdown = (event) => {
+    const dropdown = document.getElementById('dropdown');
+    if (isDropdownOpen.value && dropdown && !dropdown.contains(event.target)) {
+        isDropdownOpen.value = false;
+    }
+};
+
+onMounted(() => {
+    document.addEventListener('click', closeDropdown);
+});
+
+onUnmounted(() => {
+    document.removeEventListener('click', closeDropdown);
+});
 </script>
 
 <template>
@@ -53,7 +72,7 @@ const toggleDropdown = () => {
                                 class="h-customHeight overflow-hidden bg-customBg focus:outline-none px-2 w-full py-3 rounded-md border-customBorder">
                         </div>
                     </td>
-                    <td class=" p-4 ">
+                    <td class=" p-4 text-black">
                         <Checkbox label="Director" />
 
                     </td>
@@ -73,23 +92,23 @@ const toggleDropdown = () => {
 
                 </tr>
                 <tr>
-                    <td class="p-4">
-                        <Checkbox label="Director" />
+                    <td class="p-4 text-black">
+                        <Checkbox label="Secretary" />
                     </td>
                 </tr>
                 <tr>
-                    <td class="border-b p-4 border-customBorder">
-                        <Checkbox label="Director" />
+                    <td class="border-b p-4 text-black border-customBorder">
+                        <Checkbox label="Signatory" />
                     </td>
                 </tr>
                 <tr class="w-full border-gray-400 items-center bg-customBg">
                     <td scope="col" colspan="5" class="px-6 items-center justify-center text-center text-base pt-2">
                         <div class="relative inline-block text-left">
-                            <i @click="toggleDropdown" class="material-icons">add_circle</i>
+                            <i @click.stop="preventClose" @click="toggleDropdown" class="material-icons">add_circle</i>
 
                             <div v-if="isDropdownOpen"
-                                class="origin-top-right absolute right-[-2rem] w-32 top-6 focus:outline-none" role="menu"
-                                aria-orientation="vertical" aria-labelledby="options-menu">
+                                class="origin-top-right absolute right-[-2rem] w-32 top-6 focus:outline-none" id="dropdown"
+                                role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                                 <div class="z-10 fixed border border-customBorder bg-customBg rounded" role="none">
                                     <a href="#"
                                         class="flex items-center gap-1 px-4 py-2 border-b border-customBorder text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
@@ -111,8 +130,6 @@ const toggleDropdown = () => {
                     </td>
                 </tr>
             </tbody>
-
-
         </table>
     </div>
     <div class="w-full mt-10 flex justify-between">
