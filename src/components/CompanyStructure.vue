@@ -86,10 +86,11 @@ onUnmounted(() => {
                             class="h-customHeight w-full py-3 focus:outline-none px-2 bg-customBg rounded-md border-customBorder"
                             placeholder="%" min="0">
                     </td>
-                    <td class="border border-customBorder text-center align-middle" scope="row" rowspan="3">
-                        <img src="../assets/icons/delete.png" class="items-center" alt="">
+                    <td class="border text-center border-customBorder align-middle" scope="row" rowspan="3">
+                        <div class="h-full flex justify-center items-center">
+                            <img src="../assets/icons/delete.png" alt="">
+                        </div>
                     </td>
-
                 </tr>
                 <tr>
                     <td class="p-4 text-black">
