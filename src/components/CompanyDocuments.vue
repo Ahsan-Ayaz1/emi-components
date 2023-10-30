@@ -60,7 +60,7 @@ const tableHeadings = [
     </div>
 </template>
 
-<style>
+<style scoped>
 .material-icons {
     font-size: 34px !important;
     color: #F0C10E;
