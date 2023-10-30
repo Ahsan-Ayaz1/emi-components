@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+/* .custom-shadow:hover {
+  box-shadow: -1px 0px 20px 5px #f0c10e;
+} */
