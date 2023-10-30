@@ -9,6 +9,7 @@ import CompanyAddresses from './components/CompanyAddresses.vue';
 import CompanyInfo from './components/CompanyInfo.vue';
 import CompanyStructure from './components/CompanyStructure.vue';
 import CompanyDocuments from './components/CompanyDocuments.vue';
+import CompanyTax from './components/CompanyTax.vue';
 import { ref } from 'vue';
 
 const toggle = ref('value')
@@ -22,9 +23,10 @@ const text = ref('Next')
   <div class="container">
     <!-- <CompanyDocuments /> -->
     <!-- <CompanyAddresses /> -->
-    <CompanyStructure />
+    <!-- <CompanyStructure /> -->
     <!-- <CompanyInfo /> -->
     <!-- <CompanyIdentity /> -->
+    <CompanyTax/>
   </div>
   <!-- <Button :btntext="text" />
   <Checkbox />

@@ -1,11 +1,14 @@
 <script setup>
-const props = defineProps(['radioLabel'])
+const props = defineProps(['label', 'checked','modelValue', 'value', 'disabled', 'id', 'name'])
+const emit = defineEmits(['update:modelValue'])
+
 </script>
 
 <template>
+
     <label class="form-control text-base">
-        <input type="radio" name="radio" />
-        {{ radioLabel }}
+        <input type="radio" @input="$emit('update:modelValue', $event.target.value)" :name="name" :value="value" :disabled="disabled" />
+        {{ label }}
     </label>
 </template>
 
@@ -23,6 +26,16 @@ input[type="radio"]::before {
 
 input[type="radio"]:checked::before {
     transform: scale(1);
+}
+
+input[type="radio"]:disabled {
+    cursor: not-allowed;
+    
+}
+
+input[type="radio"]:disabled:hover {
+    box-shadow: none;
+    
 }
 
 *,

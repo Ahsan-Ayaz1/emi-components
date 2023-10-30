@@ -11,14 +11,14 @@ const mailingAddress = ref('Same')
 <template>
     <label for="address" class=" font-medium text-base leading-6 mt-8">Operational Address</label>
     <div class="mt-4">
-        <RadioButton @click="operationalAddress = 'Same'" radioLabel="Same as Registered Address" />
-        <RadioButton @click="operationalAddress = 'Different'" radioLabel="Enter a Different Address" />
+        <RadioButton @click="operationalAddress = 'Same'" Label="Same as Registered Address" />
+        <RadioButton @click="operationalAddress = 'Different'" Label="Enter a Different Address" />
     </div>
     <RegisterAddress v-if="operationalAddress == 'Different'" />
     <label for="address" class=" font-medium text-base leading-6 mt-8">Mailing Address</label>
     <div class="mt-4">
-        <RadioButton @click="mailingAddress = 'Same'" radioLabel="Same as Registered Address" />
-        <RadioButton @click="mailingAddress = 'Different'" radioLabel="Enter a Different Address" />
+        <RadioButton @click="mailingAddress = 'Same'" Label="Same as Registered Address" />
+        <RadioButton @click="mailingAddress = 'Different'" Label="Enter a Different Address" />
     </div>
     <RegisterAddress v-if="mailingAddress == 'Different'" />
 
