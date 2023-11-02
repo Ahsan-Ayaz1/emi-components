@@ -32,7 +32,7 @@ const personTaxes = ref([
   },
 ]);
 
-const addRow = (personName) => {
+const addCitizenshipRow = (personName) => {
   const person = personTaxes.value.find((person) => person.name === personName);
   if (person) {
     person.citizenships = [
@@ -45,7 +45,7 @@ const addRow = (personName) => {
   }
 };
 
-const addNewRow = () => {
+const addNewCompanyRow = () => {
   companyTaxes.value.push({
     country_code: "",
     no_tin_reason: "",
@@ -73,15 +73,15 @@ const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
 };
 
-const preventClose = (event) => {
-  event.stopPropagation();
-};
-
 const closeDropdown = (event) => {
   const dropdown = document.getElementById("dropdown");
   if (isDropdownOpen.value && dropdown && !dropdown.contains(event.target)) {
     isDropdownOpen.value = false;
   }
+};
+
+const preventClose = (event) => {
+  event.stopPropagation();
 };
 
 onMounted(() => {
@@ -95,7 +95,6 @@ onUnmounted(() => {
 
 <template>
   <p class="text-sm text-gray-400 mt-2">Add tax information</p>
-  <pre>{{ companyTaxes }}</pre>
   <div class="relative overflow-x-auto shadow-md items-center mt-8">
     <table class="w-full text-sm border text-left text-gray-500">
       <thead class="text-xs text-gray-700 uppercase bg-customTablebg">
@@ -177,7 +176,7 @@ onUnmounted(() => {
             class="px-6 items-center justify-center text-center text-base pt-2"
           >
             <div class="relative inline-block text-left">
-              <i @click="addNewRow" class="material-icons">add_circle</i>
+              <i @click="addNewCompanyRow" class="material-icons">add_circle</i>
             </div>
           </td>
         </tr>
@@ -299,7 +298,7 @@ onUnmounted(() => {
 
               <div
                 v-if="isDropdownOpen"
-                class="origin-top-right absolute right-[-3rem] w-32 top-6 focus:outline-none"
+                class="origin-top-right absolute right-[-3.5rem] w-32 top-6 focus:outline-none"
                 id="dropdown"
                 role="menu"
                 aria-orientation="vertical"
@@ -312,7 +311,7 @@ onUnmounted(() => {
                   <div v-for="(person, index) in personTaxes" :key="index">
                     <a
                       href="#"
-                      @click="addRow(person.name)"
+                      @click="addCitizenshipRow(person.name)"
                       class="flex items-center gap-1 px-4 py-2 border-b border-customBorder text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       role="menuitem"
                       >To {{ person.name }}
