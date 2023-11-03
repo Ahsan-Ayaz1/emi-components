@@ -61,7 +61,6 @@ const removeFile = (documentIndex, documentType) => {
     You will have to upload Power of Attorney docments later for any Signatories
     added.
   </p>
-  <pre>{{ uploadedDocuments }}</pre>
   <div
     class="flex justify-center overflow-x-auto items-center sm:rounded-lg mt-8"
   >
