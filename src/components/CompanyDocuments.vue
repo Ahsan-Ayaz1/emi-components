@@ -91,7 +91,7 @@ const removeFile = (documentIndex, documentType) => {
             <td
               :rowspan="documents.length + 1"
               scope="row"
-              class="border border-customBorder py-2 rounded-md font-medium text-gray-900 whitespace-nowrap"
+              class="border border-customBorder py-4 rounded-md font-medium text-gray-900 whitespace-nowrap"
               style="width: 50%"
             >
               <div class="flex justify-between">
