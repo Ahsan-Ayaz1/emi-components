@@ -1,67 +1,53 @@
 <script setup>
 import { ref } from "vue";
 import Button from "./Button.vue";
+
 //Table Heading
 const tableHeadings = [
   { id: 1, text: "Name" },
   { id: 2, text: "Upload" },
 ];
 
-const fileInput = ref(null);
-const selectedFileName = ref("");
-const fileInputRef = ref(null);
-const selectedFiles = ref([]);
-const uploadedDocuments = ref([
-  {
-    name: "Memorandum and Articles of Associations",
-    id: 123,
-    documents: [],
-  },
-  {
-    name: "Certificate of Directorship or equivalent",
-    id: 234,
-    documents: [],
-  },
-  {
-    name: "Cretificate of Shareholders",
-    id: 763,
-    documents: [],
-  },
-]);
+const uploadedDocuments = ref({
+  memorandum_and_articles_of_association_documents: [],
+  director_documents: [],
+  shareholders_documents: [],
+  declaration_of_trust_documents: [],
+  registered_address_documents: [],
+  incorporation_documents: [],
+  incumbency_documents: [],
+  additional_supporting_documents: [],
+});
 
-const handleFileSelection = (event, person, personId) => {
-  for (let i = 0; i <= uploadedDocuments.value.length; i++) {
-    if (personId === uploadedDocuments.value[i]?.id) {
-      const files = event.target.files;
-      console.log(person);
-      selectedFileName.value = event.target.value;
-      if (files.length > 0) {
-        Array.from(files).forEach((file) => {
-          const newDocument = { name: file.name };
-          person.documents.push(newDocument);
-        });
-        selectedFileName.value = event.target.value;
-      }
-    }
+const documentTypes = {
+  memorandum_and_articles_of_association_documents:
+    "Memorandum and Articles of Associations",
+  director_documents: "Certificate of Directorship or equivalent",
+  shareholders_documents: "Certificate of Shareholder",
+  declaration_of_trust_documents:
+    "Declaration of Trust (if the UBO is not the Shareholder)",
+  registered_address_documents: "Certificate of Registered Address",
+  incorporation_documents: "Certificate of Incorporation",
+  incumbency_documents: "Certificate of Incumbency",
+  additional_supporting_documents: "Additional Supporting Documents",
+};
+
+const handleFileSelection = (event, documents) => {
+  const files = event.target.files;
+  if (files.length > 0) {
+    Array.from(files).forEach((file) => {
+      const randomId = Math.floor(Math.random() * 100000);
+      const newDocument = { name: file.name, id: randomId, type: "JPG" };
+      documents.push(newDocument);
+    });
   }
 };
 
-const removeFile = (documentIndex, personIndex) => {
-  if (
-    uploadedDocuments.value[personIndex] &&
-    uploadedDocuments.value[personIndex].documents[documentIndex]
-  ) {
-    // Use splice to remove the document at the specified index
-    uploadedDocuments.value[personIndex].documents.splice(documentIndex, 1);
+const removeFile = (documentIndex, documentType) => {
+  if (uploadedDocuments.value[documentType]) {
+    uploadedDocuments.value[documentType].splice(documentIndex, 1);
   }
 };
-
-// const truncateFileName = (fileName) => {
-//   const maxLength = 40;
-//   return fileName.length > maxLength
-//     ? fileName.slice(0, maxLength) + "..."
-//     : fileName;
-// };
 </script>
 
 <template>
@@ -91,7 +77,7 @@ const removeFile = (documentIndex, personIndex) => {
             v-for="heading in tableHeadings"
             :key="heading.id"
             scope="col"
-            class="px-6 border border-gray-400 py-3"
+            class="px-6 border border-gray-400 py-4"
           >
             {{ heading.text }}
           </th>
@@ -99,39 +85,36 @@ const removeFile = (documentIndex, personIndex) => {
       </thead>
       <tbody class="bg-customBg">
         <template
-          v-for="(person, personIndex) in uploadedDocuments"
-          :key="personIndex"
+          v-for="(documents, documentType) in uploadedDocuments"
+          :key="documentType"
         >
           <tr class="border bg-customBg">
             <td
-              :rowspan="person.documents.length + 1"
+              :rowspan="documents.length + 1"
               scope="row"
-              class="border border-customBorder rounded-md font-medium text-gray-900 whitespace-nowrap"
+              class="border border-customBorder py-2 rounded-md font-medium text-gray-900 whitespace-nowrap"
               style="width: 50%"
             >
               <div class="flex justify-between">
-                <div class="flex px-2 items-center">{{ person.name }}</div>
-                <label
-                  :for="`uploader_${person.id}`"
-                  class="flex justify-between"
-                >
+                <div class="flex px-2 items-center">
+                  {{ documentTypes[documentType] }}
+                </div>
+                <label :for="documentType" class="flex justify-between">
                   <input
                     type="file"
-                    :id="`uploader_${person.id}`"
+                    :id="documentType"
                     ref="fileInput"
                     style="display: none"
                     multiple
                     @change="
-                      (event) => handleFileSelection(event, person, person.id)
+                      (event) =>
+                        handleFileSelection(
+                          event,
+                          uploadedDocuments[documentType],
+                          documentType
+                        )
                     "
                   />
-                  <section
-                    v-if="person.documents.name"
-                    class="flex items-center gap-1"
-                  >
-                    <span>{{ person.documents.name }}</span>
-                    <i class="material-icons">done</i>
-                  </section>
                   <img
                     src="../assets/icons/file_upload.png"
                     class="h-[24px] ml-2 cursor-pointer"
@@ -140,41 +123,21 @@ const removeFile = (documentIndex, personIndex) => {
                 </label>
               </div>
             </td>
+
+            <!-- If there is no file uploaded by the user yet -->
             <td
-              v-if="person.documents.length == 0"
-              class="border border-customBorder"
+              v-if="documents.length == 0"
+              class="border py-4 border-customBorder"
               style="width: 50%"
-            >
-              <div class="p-2">
-                <label
-                  :for="`uploader_${person.id}`"
-                  class="flex justify-end items-end"
-                >
-                  <input
-                    type="file"
-                    :id="`uploader_${person.id}`"
-                    ref="fileInput"
-                    style="display: none"
-                    multiple
-                    @change="
-                      (event) => handleFileSelection(event, person, person.id)
-                    "
-                  />
-                  <img
-                    src="../assets/icons/file_upload.png"
-                    class="h-[24px] ml-2 cursor-pointer hidden"
-                    alt=""
-                  />
-                </label>
-              </div>
-            </td>
+            ></td>
           </tr>
 
+          <!-- If there is file that are uploaded by the user -->
           <tr
-            v-if="person.documents.length > 0"
-            v-for="(document, index) in person.documents"
+            v-if="documents.length > 0"
+            v-for="(document, index) in documents"
           >
-            <td class="border border-customBorder" style="width: 50%">
+            <td class="border py-4 border-customBorder" style="width: 50%">
               <div
                 class="p-2"
                 :class="{
@@ -182,18 +145,20 @@ const removeFile = (documentIndex, personIndex) => {
                   'flex justify-between items-end': document.name,
                 }"
               >
-                <label
-                  :for="`uploader_${person.id}`"
-                  class="flex justify-between"
-                >
+                <label :for="`uploader_`" class="flex justify-between">
                   <input
                     type="file"
-                    :id="`uploader_${person.id}`"
+                    :id="`uploader_`"
                     ref="fileInput"
                     style="display: none"
                     multiple
                     @change="
-                      (event) => handleFileSelection(event, person, person.id)
+                      (event) =>
+                        handleFileSelection(
+                          event,
+                          uploadedDocuments[documentType],
+                          documentType
+                        )
                     "
                   />
                   <section v-if="document.name" class="flex items-center gap-1">
@@ -211,7 +176,7 @@ const removeFile = (documentIndex, personIndex) => {
                   v-if="document.name"
                   src="../assets/icons/delete.png"
                   class="h-[24px] ml-2 cursor-pointer"
-                  @click="removeFile(index, personIndex)"
+                  @click="removeFile(index, documentType)"
                   alt=""
                 />
               </div>
