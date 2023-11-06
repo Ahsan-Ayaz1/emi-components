@@ -79,7 +79,7 @@ input[type="radio"]:hover {
 }
 
 .form-control + .form-control {
-  margin-top: 1em;
+  /* margin-top: 1em; */
 }
 
 input[type="radio"]:checked {
