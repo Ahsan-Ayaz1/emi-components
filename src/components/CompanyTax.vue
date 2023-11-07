@@ -128,7 +128,7 @@ onUnmounted(() => {
               <input
                 type="text"
                 v-model="tax.country_code"
-                class="h-customHeight overflow-hidden bg-customBg focus:outline-none px-2 w-full py-3 rounded-md border-customBorder"
+                class="h-customHeight overflow-hidden bg-customBg border-b focus:outline-none px-2 w-full py-3 border-customBorder"
               />
             </div>
           </td>
@@ -136,10 +136,13 @@ onUnmounted(() => {
             <input
               type="text"
               v-model="tax.tax_id"
-              class="h-customHeight overflow-hidden bg-customBg focus:outline-none px-2 w-full py-3 rounded-md border-customBorder"
+              class="h-customHeight overflow-hidden bg-customBg border-b focus:outline-none px-2 w-full py-3 border-customBorder"
             />
           </td>
-          <td class="border p-2 border-customBorder" scope="row">
+          <td
+            class="border border-b-0 flex gap-10 justify-center p-2 border-customBorder"
+            scope="row"
+          >
             <RadioButton
               label="A"
               class="items-center"
@@ -234,7 +237,7 @@ onUnmounted(() => {
             Residency
           </th>
           <th scope="col" class="px-6 border border-gray-400 py-3">Tax ID</th>
-          <th scope="col" class="px-6 border border-gray-400 py-3">Actions</th>
+          <th scope="col" class="px-6 border border-gray-400 py-3"></th>
         </tr>
       </thead>
       <tbody class="bg-customBg">
@@ -261,14 +264,14 @@ onUnmounted(() => {
               <input
                 type="text"
                 v-model="citizenship.residency"
-                class="h-customHeight overflow-hidden bg-customBg focus:outline-none px-2 w-full py-3 rounded-md border-customBorder"
+                class="h-customHeight overflow-hidden border-b bg-customBg focus:outline-none px-2 w-full py-3 border-customBorder"
               />
             </td>
             <td class="border p-2 border-customBorder" scope="row">
               <input
                 type="text"
                 v-model="citizenship.tax_id"
-                class="h-customHeight overflow-hidden bg-customBg focus:outline-none px-2 w-full py-3 rounded-md border-customBorder"
+                class="h-customHeight overflow-hidden bg-customBg focus:outline-none px-2 w-full py-3 border-b border-customBorder"
               />
             </td>
             <td class="border p-2 bg-customBg border-customBorder" scope="row">

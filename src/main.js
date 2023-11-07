@@ -1,6 +1,11 @@
-import './assets/main.css'
+import "./assets/main.css";
+import "gitart-vue-dialog/dist/style.css";
+import { GDialog } from "gitart-vue-dialog";
+import { plugin as dialogPlugin } from "gitart-vue-dialog";
+import { createApp } from "vue";
+import App from "./App.vue";
 
-import { createApp } from 'vue'
-import App from './App.vue'
-
-createApp(App).mount('#app')
+const app = createApp(App);
+app.mount("#app");
+app.use(dialogPlugin);
+app.component("GDialog", GDialog);

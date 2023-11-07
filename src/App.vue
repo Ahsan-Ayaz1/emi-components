@@ -21,9 +21,9 @@ const text = ref("Next");
     <!-- <RegisterAddress v-if="toggle === 'value'" /> -->
   </div>
   <div class="container">
-    <CompanyDocuments />
+    <!-- <CompanyDocuments /> -->
     <!-- <CompanyAddresses /> -->
-    <!-- <CompanyStructure /> -->
+    <CompanyStructure />
     <!-- <CompanyInfo /> -->
     <!-- <CompanyIdentity /> -->
     <!-- <CompanyTax /> -->
